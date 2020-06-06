@@ -1,0 +1,89 @@
+*{
+  font-family: "Roboto";
+}
+
+body {
+  /* background-color: #121212; */
+  background-image: url("Mountains.jpg");
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover; 
+  font-size: 62.5%;
+}
+
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 100;
+  src: url("./Fonts/Roboto-Thin.ttf") format("truetype");
+}
+
+.grid-container {
+  display: grid;
+  /* background-color: lightblue; */
+  /* grid-template-columns: 35% 75%; */
+  grid-template-columns: .5fr 1fr;
+}
+
+
+.clock-container {
+  min-width: 500px;
+}
+
+#clock {
+  font-family: "Roboto", sans-serif;
+  color: white;
+  font-size: 20em;
+  /* border: solid purple; */
+}
+
+#clock-seconds {
+  font-family: "Roboto", sans-serif;
+  color: white;
+  font-size: 8em;
+  /* background-color: red; */
+}
+
+.date-square-container{
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+
+#day-of-week {
+  font-family: "Roboto", sans-serif;
+  color: white;
+  font-size: 4em;
+  text-align: center;
+  font-weight: bold;
+  padding-left:25px;
+  /* padding-right: 8px; */
+}
+
+#day-of-month {
+  font-family: "Roboto" sans-serif;
+  color: white;
+  font-size: 4em;
+  text-align: center;
+  font-weight: bold;
+  /* padding-right: 8px; */
+}
+
+#month {
+  font-family: "Roboto", sans-serif;
+  color: white;
+  font-size: 4em;
+  text-align:center;
+  font-weight: bold;
+  /* padding-right: 8px; */
+}
+
+
+.tempreature{
+  font-family: "Roboto", sans-serif;
+  color: white;
+  font-size: 100px;
+  text-align: left;
+  padding-top: 30px;
+  font-weight: bold;
+}
