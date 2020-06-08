@@ -1,27 +1,62 @@
 <!DOCTYPE html>
 
 <html lang="en">
-
-<head>
-    <meta name="viewport" content="width=device-width,initial-scale=1" charset="utf-8" />
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet"> -->
+  <head>
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1"
+      charset="utf-8"
+    />
+    <link rel="stylesheet" href="css\weather-icons.css" />
     <link rel="stylesheet" href="Style.css" />
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="grid-container">
-        <div class="clock-container">
-            <span id="clock"></span>
-            <span id="clock-seconds"></span>
+      <div class="clock-container">
+        <span id="clock"></span>
+        <span id="clock-seconds"></span>
+      </div>
+      <div></div>
+      <div>
+        <div class="weather-top-flex">
+          <div class="weather-top">
+            <span id="city"></span>
+          </div>
+          <div class="weather-top">
+            <span class="wi wi-sunrise"></span>
+            <span id="sunrise"></span>
+          </div>
+          <div class="weather-top">
+            <span class="wi wi-sunset"></span>
+            <span id="sunset"></span>
+          </div>
         </div>
-        <div></div>
-        <div>
-            <span id="day-of-week"></span>
-            <span id="month"></span>
-            <span id="day-of-month"></span>
+        <div class="weather-mid-grid">
+          <div class="weather-symbol">
+            <span class="wi wi-wu-sunny"></span>
+          </div>
+          <div class="tempreature">
+            <span id="temp"></span>
+          </div>
+          <div class="high-low-container">
+            <div style="padding-bottom: 0.15em;" class="high-low">
+              <span>H </span>
+              <span id="temp_max"></span>
+            </div>
+            <div class="high-low">
+              <span style="padding-right: 0.19em;">L </span>
+              <span id="temp_min"></span>
+            </div>
+          </div>
         </div>
+      </div>
+      <div>
+        <span id="day-of-week"></span>
+        <span id="month"></span>
+        <span style="font-family: 'Roboto';" id="day-of-month"></span>
+      </div>
     </div>
     <script type="text/javascript" src="Index.js"></script>
-</body>
-
+  </body>
 </html>
