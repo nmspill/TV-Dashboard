@@ -70,9 +70,7 @@ function formatDate(i) {
 function getDayWeatherData(city) {
   const key = "d2271c51ac924c325f42b6450e49d991";
   const URL =
-    "https://api.openweathermap.org/data/2.5/weather?units=imperial&q=" +
-    city +
-    "&appid=" +
+    "https://api.openweathermap.org/data/2.5/onecall?units=imperial&lat=41.0148&lon=-74.0120&&exclude=hourly,minutely&appid=" +
     key;
   fetch(URL)
     .then(function (resp) {
@@ -80,18 +78,35 @@ function getDayWeatherData(city) {
     })
     .then(function (data) {
       console.log(data);
-      let temp = Math.round(data["main"]["temp"]);
-      let temp_min = Math.round(data["main"]["temp_min"]);
-      let temp_max = Math.round(data["main"]["temp_max"]);
-      let sunrise = data["sys"]["sunrise"];
-      let sunset = data["sys"]["sunset"];
+      let max = Math.round(data["daily"][0]["temp"]["max"]);
+      let min = Math.round(data["daily"][0]["temp"]["min"]);
+      let sunrise = data["daily"][0]["sunrise"];
+      let sunset = data["daily"][0]["sunset"];
 
       document.getElementById("city").innerHTML = city;
-      document.getElementById("temp").innerHTML = temp + "°";
-      document.getElementById("temp_min").innerHTML = temp_min + "°";
-      document.getElementById("temp_max").innerHTML = temp_max + "°";
+      document.getElementById("max").innerHTML = max + "°";
+      document.getElementById("min").innerHTML = min + "°";
       document.getElementById("sunrise").innerHTML = formatTime(sunrise);
       document.getElementById("sunset").innerHTML = formatTime(sunset);
+    })
+    .catch(function () {
+      console.log("error");
+    });
+}
+
+function setCurrentTemp() {
+  const key = "d2271c51ac924c325f42b6450e49d991";
+  const URL =
+    "https://api.openweathermap.org/data/2.5/onecall?units=imperial&lat=41.0148&lon=-74.0120&&exclude=hourly,minutely,daily&appid=" +
+    key;
+  fetch(URL)
+    .then(function (resp) {
+      return resp.json();
+    })
+    .then(function (data) {
+      console.log(data);
+      let temp = Math.round(data["current"]["temp"]);
+      document.getElementById("temp").innerHTML = temp + "°";
     })
     .catch(function () {
       console.log("error");
@@ -106,8 +121,13 @@ function formatTime(unix_timestamp) {
   return hours + ":" + minutes.substr(-2);
 }
 
+window.setInterval(function () {
+  this.setCurrentTemp();
+}, 60000 * 30);
+
 window.onload = function () {
   this.startTime();
   this.startDate();
+  this.setCurrentTemp();
   this.getDayWeatherData("River Vale");
 };
