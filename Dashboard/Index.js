@@ -72,8 +72,7 @@ function formatDate(i) {
 }
 
 //sets the daily weather data
-function setDailyWeatherData(city, lat, lon) {
-  const key = "d2271c51ac924c325f42b6450e49d991";
+function setDailyWeatherData(city, lat, lon, key) {
   const URL =
     "https://api.openweathermap.org/data/2.5/onecall?units=imperial&lat=" +
     lat +
@@ -145,8 +144,7 @@ function setDailyWeatherData(city, lat, lon) {
 }
 
 //sets the current weather data
-function setCurrentWeatherData(lat, lon) {
-  const key = "d2271c51ac924c325f42b6450e49d991";
+function setCurrentWeatherData(lat, lon, key) {
   const URL =
     "https://api.openweathermap.org/data/2.5/onecall?units=imperial&lat=" +
     lat +
@@ -258,10 +256,11 @@ window.setInterval(function () {
 
 //is called when the window is loaded or refreshed
 window.onload = function () {
+  const key = "d2271c51ac924c325f42b6450e49d991";
   const lat = "41.0148";
   const lon = "-74.0120";
   this.setCurrentTime();
   this.setCurrentDate();
-  this.setCurrentWeatherData(lat, lon);
-  this.setDailyWeatherData("River Vale", lat, lon);
+  this.setCurrentWeatherData(lat, lon, key);
+  this.setDailyWeatherData("River Vale", lat, lon, key);
 };
