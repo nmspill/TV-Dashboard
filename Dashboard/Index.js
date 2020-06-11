@@ -91,12 +91,53 @@ function setDailyWeatherData(city, lat, lon) {
       let min = Math.round(data["daily"][0]["temp"]["min"]);
       let sunrise = data["daily"][0]["sunrise"];
       let sunset = data["daily"][0]["sunset"];
-
       document.getElementById("city").innerHTML = city;
       document.getElementById("max").innerHTML = max + "°";
       document.getElementById("min").innerHTML = min + "°";
       document.getElementById("sunrise").innerHTML = formatTime(sunrise);
       document.getElementById("sunset").innerHTML = formatTime(sunset);
+
+      let day1 = data["daily"][1]["dt"];
+      let day2 = data["daily"][2]["dt"];
+      let day3 = data["daily"][3]["dt"];
+      let day4 = data["daily"][4]["dt"];
+      let day5 = data["daily"][5]["dt"];
+      let day6 = data["daily"][6]["dt"];
+
+      let temp1 = Math.round(data["daily"][1]["temp"]["day"]);
+      let temp2 = Math.round(data["daily"][2]["temp"]["day"]);
+      let temp3 = Math.round(data["daily"][3]["temp"]["day"]);
+      let temp4 = Math.round(data["daily"][4]["temp"]["day"]);
+      let temp5 = Math.round(data["daily"][5]["temp"]["day"]);
+      let temp6 = Math.round(data["daily"][6]["temp"]["day"]);
+
+      let icon1 = data["daily"][1]["weather"][0]["main"];
+      let icon2 = data["daily"][2]["weather"][0]["main"];
+      let icon3 = data["daily"][3]["weather"][0]["main"];
+      let icon4 = data["daily"][4]["weather"][0]["main"];
+      let icon5 = data["daily"][5]["weather"][0]["main"];
+      let icon6 = data["daily"][6]["weather"][0]["main"];
+
+      document.getElementById("day1").innerHTML = setForecastDate(day1);
+      document.getElementById("day2").innerHTML = setForecastDate(day2);
+      document.getElementById("day3").innerHTML = setForecastDate(day3);
+      document.getElementById("day4").innerHTML = setForecastDate(day4);
+      document.getElementById("day5").innerHTML = setForecastDate(day5);
+      document.getElementById("day6").innerHTML = setForecastDate(day6);
+
+      document.getElementById("temp1").innerHTML = temp1 + "°";
+      document.getElementById("temp2").innerHTML = temp2 + "°";
+      document.getElementById("temp3").innerHTML = temp3 + "°";
+      document.getElementById("temp4").innerHTML = temp4 + "°";
+      document.getElementById("temp5").innerHTML = temp5 + "°";
+      document.getElementById("temp6").innerHTML = temp6 + "°";
+
+      document.getElementById("icon1").className = setForecastIcon(icon1);
+      document.getElementById("icon2").className = setForecastIcon(icon2);
+      document.getElementById("icon3").className = setForecastIcon(icon3);
+      document.getElementById("icon4").className = setForecastIcon(icon4);
+      document.getElementById("icon5").className = setForecastIcon(icon5);
+      document.getElementById("icon6").className = setForecastIcon(icon6);
     })
     .catch(function () {
       console.log("error");
@@ -123,8 +164,10 @@ function setCurrentWeatherData(lat, lon) {
       let currentIcon = data["current"]["weather"][0]["main"];
       let sunsetTime = data["current"]["sunset"];
       document.getElementById("temp").innerHTML = temp + "°";
-      console.log(currentIcon);
-      formatCurrentIcon(currentIcon, sunsetTime);
+      document.getElementById("currentIcon").className = setCurrentIcon(
+        currentIcon,
+        sunsetTime
+      );
     })
     .catch(function () {
       console.log("error");
@@ -132,45 +175,39 @@ function setCurrentWeatherData(lat, lon) {
 }
 
 //formats current weather icon
-function formatCurrentIcon(s, sunsetTime) {
+function setCurrentIcon(s, sunsetTime) {
   let currentTime = new Date().getTime();
   switch (s) {
     case "Thunderstorm":
-      document.getElementById("currentIcon").className = "wi wi-thunderstorm";
-      break;
+      return "wi wi-thunderstorm";
 
     case "Drizzle":
-      document.getElementById("currentIcon").className = "wi wi-showers";
-      break;
+      return "wi wi-showers";
 
     case "Rain":
-      document.getElementById("currentIcon").className = "wi wi-rain";
-      break;
+      return "wi wi-rain";
 
     case "Snow":
-      document.getElementById("currentIcon").className = "wi wi-snow";
-      break;
+      return "wi wi-snow";
 
     case "Clear":
       document.getElementById("weatherIcon").className =
         "weather-icon-more-top";
-      if (currentTime > sunsetTime) {
-        document.getElementById("currentIcon").className = "wi wi-day-sunny";
+      if (currentTime < sunsetTime) {
+        return "wi wi-day-sunny";
       } else {
-        document.getElementById("currentIcon").className = "wi wi-night-clear";
+        return "wi wi-night-clear";
       }
-      break;
 
     case "Clouds":
       document.getElementById("weatherIcon").className =
         "weather-icon-more-top";
-      document.getElementById("currentIcon").className = "wi wi-cloudy";
-      break;
+      return "wi wi-cloudy";
 
     default:
       document.getElementById("weatherIcon").className =
         "weather-icon-more-top";
-      document.getElementById("currentIcon").className = "wi wi-dust";
+      return "wi wi-dust";
   }
 }
 
@@ -181,6 +218,37 @@ function formatTime(unix_timestamp) {
   hours = ((hours + 11) % 12) + 1;
   let minutes = "0" + date.getMinutes();
   return hours + ":" + minutes.substr(-2);
+}
+
+function setForecastDate(unix_timestamp) {
+  days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  let date = new Date(unix_timestamp * 1000);
+  return days[date.getDay()];
+}
+
+function setForecastIcon(s) {
+  switch (s) {
+    case "Thunderstorm":
+      return "wi wi-thunderstorm";
+
+    case "Drizzle":
+      return "wi wi-showers";
+
+    case "Rain":
+      return "wi wi-rain";
+
+    case "Snow":
+      return "wi wi-snow";
+
+    case "Clear":
+      return "wi wi-day-sunny";
+
+    case "Clouds":
+      return "wi wi-cloudy";
+
+    default:
+      return "wi wi-dust";
+  }
 }
 
 //sets current weather data every 30 minutes

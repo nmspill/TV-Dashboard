@@ -32,7 +32,7 @@ body {
 #clock-seconds {
   font-family: "Roboto", sans-serif;
   color: white;
-  font-size: 7.5em;
+  font-size: 6em;
 }
 
 #day-of-week {
@@ -59,7 +59,6 @@ body {
 
 .weather-top-flex {
   display: flex;
-  grid-template-columns: auto auto auto;
   padding-top: 1.5em;
   min-width: 40em;
 }
@@ -72,9 +71,8 @@ body {
   flex-grow: 1;
 }
 
-.weather-mid-grid {
+.weather-mid-flex {
   display: flex;
-  grid-template-columns: auto auto auto;
 }
 
 .weather-icon-more-top {
@@ -111,7 +109,6 @@ body {
   padding-bottom: 2em;
   flex-grow: 0.5;
   text-align: center;
-  /* border: solid red; */
   min-width: 6.5em;
 }
 
@@ -119,4 +116,32 @@ body {
   font-family: "Roboto", sans-serif;
   color: white;
   font-size: 2.5em;
+}
+
+.weather-forecast-flex {
+  display: flex;
+}
+
+.weather-forecast-day {
+  font-family: "Roboto", sans-serif;
+  color: white;
+  text-align: center;
+  font-size: 2em;
+}
+
+.weather-forecast-icon {
+  color: white;
+  text-align: center;
+  font-size: 2em;
+  padding-top: 0.2em;
+  width: 100%;
+}
+
+.weather-forecast-tempreature {
+  font-family: "Roboto", sans-serif;
+  color: white;
+  text-align: center;
+  font-size: 2em;
+  padding-top: 0.2em;
+  width: 100%;
 }
